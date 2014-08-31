@@ -7,7 +7,7 @@ describe Buttercoin::Client do
   let(:public_key) { 'public key' }
   let(:secret_key) { 'secret key' }
   let(:mode) { 'sandbox' }
-  let(:client) { Buttercoin::Client.new(:public_key => public_key, :secret_key => secret_key) }
+  let(:client) { Buttercoin::Client.new(:public_key => public_key, :secret_key => secret_key, :mode => mode) }
   
 
   before :all do
@@ -26,8 +26,8 @@ describe Buttercoin::Client do
       expect(client.mode).to eq('sandbox')
     end
 
-    it "should set the base_uri to the sandbox" do
-      expect(Buttercoin::Client.new.class.base_uri).to eq(Buttercoin::Client::SANDBOX_URI)
+    it "should default the base_uri to the production" do
+      expect(Buttercoin::Client.new.class.base_uri).to eq(Buttercoin::Client::PRODUCTION_URI)
     end
   end
 
@@ -38,15 +38,15 @@ describe Buttercoin::Client do
     let(:timestamp) { 1444444444444 }
     let(:path) { '/orders' }
     let(:options) do { :status => "opened" } end
-    let(:message) { "1444444444444https://api.qa.dcxft.com/v1/orders?status=opened" }
-    let(:signature) { "0OBOwbOX3npNPyI6TLq+PN2jpW1NhLn+St0FOpcKvMc=\n" }
+    let(:message) { "1444444444444https://sandbox.buttercoin.com/v1/orders?status=opened" }
+    let(:signature) { "SLkHo487FQg5k7hWC8GoK/Us8e51ddqKhsw7V1gMKq8=\n" }
 
     it "should build proper get request message for signing" do
-      expect(build_message.call(:get, path, timestamp, options)).to eq("1444444444444https://api.qa.dcxft.com/v1/orders?status=opened")
+      expect(build_message.call(:get, path, timestamp, options)).to eq("1444444444444https://sandbox.buttercoin.com/v1/orders?status=opened")
     end
 
     it "should build proper get request message for signing" do
-      expect(build_message.call(:post, path, timestamp, options)).to eq("1444444444444https://api.qa.dcxft.com/v1/orders{\"status\":\"opened\"}")
+      expect(build_message.call(:post, path, timestamp, options)).to eq("1444444444444https://sandbox.buttercoin.com/v1/orders{\"status\":\"opened\"}")
     end
 
     it "should properly sign a message with the given key" do
