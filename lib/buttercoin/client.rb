@@ -23,7 +23,7 @@ module Buttercoin
     }
 
     PRODUCTION_URI = 'https://api.buttercoin.com/v1'
-    SANDBOX_URI = 'https://api.qa.dcxft.com/v1'
+    SANDBOX_URI = 'https://sandbox.buttercoin.com/v1'
 
     CA_CERT = 'cert/ca-cert.crt'
 
@@ -40,7 +40,7 @@ module Buttercoin
 
       self.public_key, self.secret_key = options.values_at(:public_key, :secret_key)
       self.mode = options[:mode] || CONFIG[:mode]
-      self.class.base_uri (options[:mode] == 'production') ? PRODUCTION_URI : SANDBOX_URI
+      self.class.base_uri (self.mode == 'production') ? PRODUCTION_URI : SANDBOX_URI
     end
 
     # Wrappers for the main HTTP verbs
@@ -125,8 +125,6 @@ module Buttercoin
         begin
           mash = Hashie::Mash.new(JSON.parse(response_body))
           raise HttpError.new(mash.errors.first.message)
-        rescue
-          raise HttpError.new(response_body)
         end
       end
     end

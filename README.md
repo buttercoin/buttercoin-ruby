@@ -28,7 +28,7 @@ In order to keep sensitive data out of your codebase, we recommend you use envir
 
     BUTTERCOIN_PUBLIC_KEY=5ti8pqwejqfcla4se1d7whydryoso5z8
     BUTTERCOIN_SECRET_KEY=JCfcasdfinmKtdHgIlwXi3SEMJoCf4Bg
-    BUTTERCOIN_MODE=staging
+    BUTTERCOIN_MODE=sandbox
 
 You can also create a script to export the variables before you start your server.
 
@@ -42,13 +42,13 @@ Setting | Property Name | Description
 --- | --- | ---
 Public Key | `:public_key` | Your Buttercoin API Public Key  
 Secret Key | `:secret_key` | Your Buttercoin API Secret Key  
-Mode | `:mode` | Your development environment (default: `'production'`, set to `'staging'` to test with testnet bitcoins)
+Mode | `:mode` | Your development environment (default: `'production'`, set to `'sandbox'` to test with testnet bitcoins)
 
 ###### Example
 ```ruby
 client = Buttercoin::Client.new(:public_key => '5ti8pqwejqfcla4se1d7whydryoso5z8',
 																:secret_key => 'JCfcasdfinmKtdHgIlwXi3SEMJoCf4Bg',
-																:mode => 'staging')
+																:mode => 'sandbox')
 ```
 
 #### Configuration can be updated to reuse the same Client:
@@ -127,7 +127,7 @@ Valid params include (must be added to array in this order)
 
 Name | Param | Description
 --- | --- | ---
-Status | `status` | enum: `['opened', 'reopened', 'filled', 'canceled']`  
+Status | `status` | enum: `['opened', 'partial-filled', 'filled', 'canceled']`  
 Side | `side` | enum: `['buy', 'sell']`  
 Order Type | `orderType` | enum: `['market', 'limit']`  
 Date Min | `dateMin` | format: ISO-8601, e.g. `'2014-05-06T13:15:30Z'`  
@@ -298,5 +298,9 @@ The aim is to take your great ideas and make everyone's experience using Butterc
 ### 0.0.1
 
 - First release.
+
+### 0.0.2
+
+- changed test environment to sandbox
 
 ## License
