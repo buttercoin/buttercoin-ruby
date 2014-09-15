@@ -18,6 +18,15 @@ module Buttercoin
         get '/orderbook', nil, {}, false
       end
 
+      # Retrieve the last 100 trades
+      #
+      # @return Hashie object containing trade history
+
+      def get_trade_history
+        mash = get '/trades', nil, {}, false
+        mash.trades
+      end
+      
     end
   end
 end
