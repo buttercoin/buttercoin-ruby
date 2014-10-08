@@ -97,6 +97,13 @@ Return the current bid, ask, and last sell prices on the Buttercoin platform
 client.get_ticker()
 ```
 
+**Get Trade History**  
+Return the last 100 trades
+
+```ruby
+client.get_trade_history()
+```
+
 ###### Authenticated
 
 **Key Permissions**  
@@ -295,12 +302,16 @@ The aim is to take your great ideas and make everyone's experience using Butterc
 
 ## Release History
 
-### 0.0.1
+### 0.0.3
 
-- First release.
+- added trade history endpoint
 
 ### 0.0.2
 
 - changed test environment to sandbox
+
+### 0.0.1
+
+- First release.
 
 ## License

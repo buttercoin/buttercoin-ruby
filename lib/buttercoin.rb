@@ -32,7 +32,8 @@ module Buttercoin
 
     def_delegators :default_client,
       :get_ticker,
-      :get_order_book
+      :get_order_book,
+      :get_trade_history
 
     def_delegators :default_client,
       :get_key,
