@@ -46,6 +46,7 @@ module Buttercoin
     # Wrappers for the main HTTP verbs
 
     def get(path, timestamp=nil, options={}, authenticate=true)
+      path = "#{path}?#{URI.encode_www_form(options)}" if !options.empty?
       http_request :get, path, timestamp, options, authenticate
     end
 
@@ -80,7 +81,6 @@ module Buttercoin
 
     def build_message(verb, path, timestamp, options)
       if [:get, :delete].include? verb
-        path = "#{path}?#{URI.encode_www_form(options)}" if !options.empty?
         message = timestamp.to_s + self.class.base_uri + path
       else
         message = timestamp.to_s + self.class.base_uri + path + options.to_json
