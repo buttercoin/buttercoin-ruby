@@ -142,7 +142,7 @@ Date Max | `dateMax` | format: ISO-8601, e.g. `'2014-05-06T13:15:30Z'`
 
 ```ruby
 // query for multiple orders
-order_params = [ "status" => "canceled", "side" => "sell" ]
+order_params = { :status => "canceled", :side => "sell" }
 
 client.get_orders(orderParams, timestamp)
 
@@ -171,7 +171,7 @@ Date Max | `dateMax` | format: ISO-8601, e.g. `'2014-05-06T13:15:30Z'`
 
 ```ruby
 // query for multiple transactions
-trxn_params = [ "status" => "funded", "transactionType" => "deposit" ]
+trxn_params = { :status => "funded", :transactionType => "deposit" }
 
 client.get_transactions(trxn_params, timestamp)
 
@@ -180,7 +180,7 @@ trxn_id = '53a22ce164f23e7301a4fee5';
 client.get_transaction_by_id(trxn_id, timestamp)
 
 // single transaction by url
-url = 'https://api.buttercoin.com/v1/orders/{order_id}'
+url = 'https://api.buttercoin.com/v1/transactions/{transaction_id}'
 
 client.get_transaction_by_url(url, timestamp)
 ```
@@ -212,7 +212,9 @@ order = {
 client.create_order(order, timestamp)
 ```
 
-**Create Transaction**  
+**Create Transaction**
+
+_Please contact Buttercoin support before creating a USD deposit using the API_
 
 Deposit transaction params include: 
 
